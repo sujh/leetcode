@@ -21,3 +21,24 @@ def int_to_roman(num)
   end
   rst
 end
+
+#简化
+def int_to_roman(num)
+  rst = ""
+  romans = %w(I V X L C D M)
+  num.digits.each_with_index do |n, idx|
+    next if n == 0
+    char = 
+      if n < 4
+        romans[idx * 2] * n
+      elsif n == 4
+        romans[idx * 2] + romans[idx * 2 + 1]
+      elsif n == 9
+        romans[idx * 2] + romans[idx * 2 + 2]
+      else
+        romans[idx * 2 + 1] + romans[idx * 2] * (n % 5)
+      end
+    rst.prepend char
+  end
+  rst
+end
